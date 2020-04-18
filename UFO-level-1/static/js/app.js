@@ -24,33 +24,53 @@ button.on("click", () => {
     // sanity check
     console.log(filteredData)
 
-    let ufoLists = d3.select(".ufo-table");
+    
+    let ufoLists = d3.select("tbody");
 
     ufoLists.html("");
 
     let dateTimeTable = filteredData.map(tableData => tableData.datetime);
     let cityTable = filteredData.map(tableData => tableData.city);
-    let countryTable = filteredData.map(tableData => tableData.state);
+    let stateTable = filteredData.map(tableData => tableData.state);
+    let countryTable = filteredData.map(tableData => tableData.country);
     let shapeTable = filteredData.map(tableData => tableData.shape);
     let durationMinutesTable = filteredData.map(tableData => tableData.durationMinutes);
     let commentsTable = filteredData.map(tableData => tableData.comments);
 
-    console.log(`
-    ${dateTimeTable}
-    ${cityTable}
-    ${countryTable}
-    ${shapeTable}
-    ${durationMinutesTable}
-    ${commentsTable}
-    `)
+    // // Sanity Check
 
-    ufoLists.append("td").text(tableData.datetime);
-    ufoLists.append("td").text(tableData.city);
-    ufoLists.append("td").text(tableData.state);
-    ufoLists.append("td").text(tableData.country);
-    ufoLists.append("td").text(tableData.shape);
-    ufoLists.append("td").text(tableData.durationMinutesa);
-    ufoLists.append("td").text(tableData.comments);
+    filteredData.forEach(i => {
+        console.log(i);
+        // ufoLists.append("td").text(`${cityTable[i]}`);
+        let row = ufoLists.append("tr");
 
+        Object.entries(i).forEach(([key, value]) => {
+            console.log(key, value);
+            ufoLists.append("td").text(`${value}`);
+            
+            // let cell = row.text(value);
+            // cell.text(value);
+        });
+    });
+
+    // console.log(`
+    // ${dateTimeTable}
+    // ${cityTable}
+    // ${countryTable}
+    // ${shapeTable}
+    // ${durationMinutesTable}
+    // ${commentsTable}
+    // `)
+
+
+    
+    // ufoLists.append("td").text(`${dateTimeTable}`);
+    // ufoLists.append("td").text(`${cityTable}`);
+    // ufoLists.append("td").text(`${stateTable}`);
+    // ufoLists.append("td").text(`${countryTable}`);
+    // ufoLists.append("td").text(`${shapeTable}`);
+    // ufoLists.append("td").text(`${durationMinutesTable}`);
+    // ufoLists.append("td").text(`${commentsTable}`);
+    
     
 });
